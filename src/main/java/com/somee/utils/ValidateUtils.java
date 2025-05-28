@@ -53,4 +53,8 @@ public class ValidateUtils {
     public boolean verifyUrl(String url) {
         return driver.getCurrentUrl().contains(url);
     }
+
+    public boolean verifyText(String text1, String text2) {
+        return text1.contains(text2);
+    }
 }

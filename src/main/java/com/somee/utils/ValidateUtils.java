@@ -3,17 +3,18 @@ package com.somee.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
 
 public class ValidateUtils {
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private final int timeoutWaitForPageLoaded = 10;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
     public ValidateUtils(WebDriver driver) {
         this.driver = driver;
@@ -43,6 +44,7 @@ public class ValidateUtils {
             }
         };
         try {
+            int timeoutWaitForPageLoaded = 10;
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutWaitForPageLoaded));
             wait.until(expectedConditions);
         } catch (Throwable e) {
@@ -56,5 +58,11 @@ public class ValidateUtils {
 
     public boolean verifyText(String text1, String text2) {
         return text1.contains(text2);
+    }
+
+    public void selectedValue(By element, String value) {
+        WebElement dropdownElement= wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        Select select = new Select(dropdownElement);
+        select.selectByValue(value);
     }
 }

@@ -65,4 +65,10 @@ public class ValidateUtils {
         Select select = new Select(dropdownElement);
         select.selectByValue(value);
     }
+
+    public void clickElementWithJS(By element) {
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(element)); // Vẫn chờ phần tử có thể click được
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", webElement);
+    }
 }

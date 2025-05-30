@@ -23,6 +23,11 @@ public class ValidateUtils {
 
     public void setText(By element, String text) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.findElement(element).clear();
         driver.findElement(element).sendKeys(text);
     }
@@ -34,6 +39,11 @@ public class ValidateUtils {
 
     public void clickElement(By element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.findElement(element).click();
     }
 
@@ -62,18 +72,33 @@ public class ValidateUtils {
 
     public void selectedValue(By element, String value) {
         WebElement dropdownElement= wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Select select = new Select(dropdownElement);
         select.selectByValue(value);
     }
 
     public void clickElementWithJS(By element) {
         WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(element)); // Vẫn chờ phần tử có thể click được
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", webElement);
     }
 
     public void setValueWithJS(By element, String text) {
         WebElement webElement = driver.findElement(element);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value = arguments[1];", webElement, text);
         js.executeScript("arguments[0].dispatchEvent(new Event('change'));", webElement);

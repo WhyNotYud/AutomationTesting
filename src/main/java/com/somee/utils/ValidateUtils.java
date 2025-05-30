@@ -71,4 +71,11 @@ public class ValidateUtils {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", webElement);
     }
+
+    public void setValueWithJS(By element, String text) {
+        WebElement webElement = driver.findElement(element);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value = arguments[1];", webElement, text);
+        js.executeScript("arguments[0].dispatchEvent(new Event('change'));", webElement);
+    }
 }

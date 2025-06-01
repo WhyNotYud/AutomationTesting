@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public class ValidateUtils {
     private final WebDriver driver;
@@ -102,5 +103,52 @@ public class ValidateUtils {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value = arguments[1];", webElement, text);
         js.executeScript("arguments[0].dispatchEvent(new Event('change'));", webElement);
+    }
+
+    public boolean verifyCategoryAddedToTable(By categoryTable, String categoryName) {
+         WebElement table = driver.findElement(categoryTable);
+         boolean found = false;
+         List<WebElement> rows = table.findElements(By.tagName("tr"));
+         for (WebElement row : rows) {
+             List<WebElement> cells = row.findElements(By.tagName("td"));
+             for (WebElement cell : cells) {
+                 if (cell.getText().equals(categoryName)) {
+                     found = true;
+                     break;
+                 }
+             }
+             if (found) {
+                 break;
+             }
+         }
+         return found;
+    }
+
+    public boolean verifyCategoryExistsInTable(String categoryName) {
+        waitForPageLoaded();
+        By categoryTableLocator = By.id("ContentPlaceHolder1_GridView1");
+        By categoryRowLocator = By.xpath(
+                "//table[@id='ContentPlaceHolder1_GridView1']//tr[./td[text()='" + categoryName + "']]"
+        );
+        try {
+            wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated(categoryRowLocator));
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        }
+    }
+
+    public boolean verifyCategoryDoesNotExistInTable(String categoryName) {
+        waitForPageLoaded();
+        By categoryTableLocator = By.id("ContentPlaceHolder1_GridView1");
+        By categoryRowLocator = By.xpath(
+                "//table[@id='ContentPlaceHolder1_GridView1']//tr[./td[text()='" + categoryName + "']]"
+        );
+        try {
+            wait.until(org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated(categoryRowLocator));
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        }
     }
 }

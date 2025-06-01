@@ -2,6 +2,7 @@ package com.somee.tests;
 
 import com.somee.base.BaseTest;
 import com.somee.pages.LoginPage;
+import com.somee.pages.OrderPage;
 import com.somee.utils.ValidateUtils;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -13,6 +14,7 @@ import static org.testng.Assert.assertTrue;
 public class OrderTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LoginPage loginPage;
+    private OrderPage orderPage;
 
     private By getLinkDangNhap = By.id("LinkDN");
     private By getQuayLai = By.linkText("Quay lại");
@@ -21,18 +23,18 @@ public class OrderTest extends BaseTest {
     private By getSoLuong = By.id("ContentPlaceHolder1_Datalist1_txtSoLuong_0");
     private By getThemGioHang = By.id("ContentPlaceHolder1_Datalist1_btnThemVaoGio_0");
     private By getThanhToan = By.id("ContentPlaceHolder1_btnThanhToan");
-    private By ghiChu = By.id("ContentPlaceHolder1_dtlThongTinUser_txtGhiChu_0");
-    private By getDatHang = By.id("ContentPlaceHolder1_dtlThongTinUser_btnThanhToan_0");
     private By getThongBao = By.id("ContentPlaceHolder1_lblThanhCong");
     private By getThongBaoLoi = By.id("ContentPlaceHolder1_lblThongBao");
     private By getThongBaoLoiUser = By.id("ContentPlaceHolder1_dtlThongTinUser_lblThongBao_0");
     private By getGioHang = By.id("HyperLink4");
+    private By ghiChu = By.id("ContentPlaceHolder1_dtlThongTinUser_txtGhiChu_0");
 
     @BeforeMethod
     @Override
     public void setUp() {
         super.setUp();
         loginPage = new LoginPage(driver);
+        orderPage = new OrderPage(driver);
         validateUtils = new ValidateUtils(driver);
         validateUtils.clickElement(getLinkDangNhap);
     }
@@ -46,9 +48,7 @@ public class OrderTest extends BaseTest {
         validateUtils.clickElementWithJS(getSanPham);
         validateUtils.setValueWithJS(getSoLuong, "2");
         validateUtils.clickElementWithJS(getThemGioHang);
-        validateUtils.clickElementWithJS(getThanhToan);
-        validateUtils.setText(ghiChu, "Giao hàng vào buổi sáng");
-        validateUtils.clickElementWithJS(getDatHang);
+        orderPage.Order("Giao hàng vào buổi sáng");
         assertTrue(validateUtils.verifyText(validateUtils.getText(getThongBao), "Đặt hàng thành công!"), "Người dùng đặt hàng thành công!");
         Thread.sleep(2000);
     }
@@ -73,9 +73,7 @@ public class OrderTest extends BaseTest {
         validateUtils.clickElementWithJS(getSanPham);
         validateUtils.setValueWithJS(getSoLuong, "2");
         validateUtils.clickElementWithJS(getThemGioHang);
-        validateUtils.clickElementWithJS(getThanhToan);
-        validateUtils.setText(ghiChu, "");
-        validateUtils.clickElementWithJS(getDatHang);
+        orderPage.Order("");
         assertTrue(validateUtils.verifyText(validateUtils.getText(getThongBaoLoiUser), "Nhập ghi chú!"), "Người dùng đặt hàng không thành công: Nhập ghi chú!");
         Thread.sleep(2000);
     }

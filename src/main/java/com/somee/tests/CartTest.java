@@ -4,10 +4,9 @@ import com.somee.base.BaseTest;
 import com.somee.pages.CartPage;
 import com.somee.pages.LoginPage;
 import com.somee.utils.ValidateUtils;
+import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
 
@@ -16,16 +15,21 @@ public class CartTest extends BaseTest {
     private LoginPage loginPage;
     private CartPage cartPage;
 
-    private By dangNhapButton = By.id("LinkDN");
-    private By getGioHang = By.id("HyperLink4");
-    private By sanPham1 = By.id("ContentPlaceHolder1_DataList1_HyperLink1_0");
-    private By tenSanPham1 = By.id("ContentPlaceHolder1_Datalist1_lblTenSP_0");
-    private By sanPham2 = By.id("ContentPlaceHolder1_DataList1_HyperLink1_2");
-    private By tenSanPham2 = By.id("ContentPlaceHolder1_Datalist1_lblTenSP_0");
-    private By sanPham3 = By.id("ContentPlaceHolder1_DataList1_HyperLink1_4");
-    private By tenSanPham3 = By.id("ContentPlaceHolder1_Datalist1_lblTenSP_0");
-    private By xoaGioHang = By.id("ContentPlaceHolder1_btnXoaGioHang");
-    private By thongBao = By.id("ContentPlaceHolder1_gvGioHang_Label1");
+    private final By dangNhapButton = By.id("LinkDN");
+    private final By getGioHang = By.id("HyperLink4");
+    private final By sanPham1 = By.id("ContentPlaceHolder1_DataList1_HyperLink1_0");
+    private final By tenSanPham1 = By.id("ContentPlaceHolder1_Datalist1_lblTenSP_0");
+    private final By sanPham2 = By.id("ContentPlaceHolder1_DataList1_HyperLink1_2");
+    private final By tenSanPham2 = By.id("ContentPlaceHolder1_Datalist1_lblTenSP_0");
+    private final By sanPham3 = By.id("ContentPlaceHolder1_DataList1_HyperLink1_4");
+    private final By tenSanPham3 = By.id("ContentPlaceHolder1_Datalist1_lblTenSP_0");
+    private final By xoaGioHang = By.id("ContentPlaceHolder1_btnXoaGioHang");
+    private final By thongBao = By.id("ContentPlaceHolder1_gvGioHang_Label1");
+
+    @BeforeClass
+    public void setUpRecord() throws Exception {
+        VideoRecorder.startRecord("TestCart");
+    }
 
     @BeforeMethod
     @Override
@@ -108,9 +112,8 @@ public class CartTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @AfterMethod
-    @Override
-    public void tearDown() {
-        super.tearDown();
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        VideoRecorder.stopRecord();
     }
 }

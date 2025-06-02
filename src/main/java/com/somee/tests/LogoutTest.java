@@ -34,8 +34,7 @@ public class LogoutTest extends BaseTest {
         validateUtils.clickElement(getLinkDangNhap);
     }
 
-    // Test case 1: Đăng xuất thành công với admin
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Đăng xuất thành công với admin")
     public void testAdminLogoutSuccess() throws InterruptedException  {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -44,8 +43,7 @@ public class LogoutTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 2: Đăng xuất thành công với user
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Đăng xuất thành công với user")
     public void testUserLogoutSuccess() throws InterruptedException  {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");

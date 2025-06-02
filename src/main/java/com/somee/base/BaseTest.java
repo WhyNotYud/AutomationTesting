@@ -30,7 +30,7 @@ public class BaseTest {
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot, new File("images/" + result.getName() + ".png"));
         } catch (Exception e) {
-            System.out.println();
+            System.out.println(e.getMessage());
         }
         if (driver != null) {
             driver.quit();

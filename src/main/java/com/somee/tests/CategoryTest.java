@@ -4,6 +4,7 @@ import com.somee.base.BaseTest;
 import com.somee.base.TestListener;
 import com.somee.pages.CategoryPage;
 import com.somee.pages.LoginPage;
+import com.somee.utils.Log;
 import com.somee.utils.ValidateUtils;
 import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
@@ -24,6 +25,7 @@ public class CategoryTest extends BaseTest {
 
     @BeforeClass
     public void setUpRecord() throws Exception {
+        Log.info("Bắt đầu quay video");
         VideoRecorder.startRecord("TestLogin");
     }
 
@@ -126,5 +128,6 @@ public class CategoryTest extends BaseTest {
     @AfterClass
     public void tearDownClass() throws Exception {
         VideoRecorder.stopRecord();
+        Log.info("Kết thúc quay video");
     }
 }

@@ -1,5 +1,6 @@
 package com.somee.base;
 
+import com.somee.utils.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -29,6 +30,7 @@ public class BaseTest {
         try {
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot, new File("images/" + result.getName() + ".png"));
+            Log.info("Đã chụp ảnh thành công");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

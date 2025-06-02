@@ -1,6 +1,7 @@
 package com.somee.tests;
 
 import com.somee.base.BaseTest;
+import com.somee.base.TestListener;
 import com.somee.pages.LoginPage;
 import com.somee.pages.OrderPage;
 import com.somee.utils.ValidateUtils;
@@ -10,6 +11,7 @@ import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestListener.class)
 public class OrderTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LoginPage loginPage;
@@ -43,8 +45,7 @@ public class OrderTest extends BaseTest {
         validateUtils.clickElement(getLinkDangNhap);
     }
 
-    // Test case 1: Đặt mua thành công
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Đặt mua thành công")
     public void testOrderSuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -57,8 +58,7 @@ public class OrderTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 2: Đặt mua trong khi giỏ hàng đang trống
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Đặt mua trong khi giỏ hàng đang trống")
     public void testOrderWithEmptyCart() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -68,8 +68,7 @@ public class OrderTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 3: Đặt mua nhưng thiếu trường thông tin ghi chú
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Đặt mua nhưng thiếu trường thông tin ghi chú")
     public void testOrderWithEmptyNote() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("user9999", "user9999");
@@ -82,8 +81,7 @@ public class OrderTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 4: Hủy thao tác đặt mua
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Hủy thao tác đặt mua")
     public void testCancelOrder() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("user9999", "user9999");

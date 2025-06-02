@@ -1,17 +1,16 @@
 package com.somee.tests;
 
 import com.somee.base.BaseTest;
+import com.somee.base.TestListener;
 import com.somee.pages.RegisterPage;
 import com.somee.utils.ValidateUtils;
 import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestListener.class)
 public class RegisterTest extends BaseTest {
     private ValidateUtils validateUtils;
     private RegisterPage registerPage;
@@ -35,8 +34,7 @@ public class RegisterTest extends BaseTest {
         validateUtils.clickElement(getLinkDangKy);
     }
 
-    // Test 1: Đăng ký thành công
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Đăng ký thành công")
     public void testRegisterSuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "user9999", "Nguyễn Văn A", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "0999999999", "Hà Nội");
@@ -44,8 +42,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 2)
-    // Test 2: Đăng ký không thành công(Tài khoản để trống)
+    @Test(priority = 2, description = "Đăng ký không thành công(Tài khoản để trống)")
     public void testRegisterWithEmptyUsername() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("", "user9999", "Nguyễn Văn A", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "0999999999", "Hà Nội");
@@ -53,8 +50,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 3)
-    // Test 3: Đăng ký không thành công(Mật khẩu để trống)
+    @Test(priority = 3, description = "Đăng ký không thành công(Mật khẩu để trống)")
     public void testRegisterWithEmptyPassword() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "", "Nguyễn Văn A", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "0999999999", "Hà Nội");
@@ -62,8 +58,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 4)
-    // Test 4: Đăng ký không thành công(Họ và tên để trống)
+    @Test(priority = 4, description = "Đăng ký không thành công(Họ và tên để trống)")
     public void testRegisterWithEmptyFullname() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "user9999", "", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "0999999999", "Hà Nội");
@@ -71,8 +66,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 5)
-    // Test 5: Đăng ký không thành công(Năm sinh để trống)
+    @Test(priority = 5, description = "Đăng ký không thành công(Năm sinh để trống)")
     public void testRegisterWithEmptyBirthDate() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "user9999", "Nguyễn Văn A", "", "Nam", "nguyenvana9999@gmail.com", "0999999999", "Hà Nội");
@@ -80,8 +74,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 6)
-    // Test 6: Đăng ký không thành công(Email để trống)
+    @Test(priority = 6, description = "Đăng ký không thành công(Email để trống)")
     public void testRegisterWithEmptyEmail() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "user9999", "Nguyễn Văn A", "01/01/2004", "Nam", "", "099999999", "Hà Nội");
@@ -89,8 +82,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 7)
-    // Test 7: Đăng ký không thành công(Số điện thoại để trống)
+    @Test(priority = 7, description = "Đăng ký không thành công(Số điện thoại để trống)")
     public void testRegisterWithEmptyPhone() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "user9999", "Nguyễn Văn A", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "", "Hà Nội");
@@ -98,8 +90,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(priority = 8)
-    // Test 8: Đăng ký không thành công(Địa chỉ để trống)
+    @Test(priority = 8, description = "Đăng ký không thành công(Địa chỉ để trống)")
     public void testRegisterWithEmptyAddress() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("user9999", "user9999", "Nguyễn Văn A", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "099999999", "");
@@ -107,8 +98,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test 9: Đăng ký không thành công(Tài khoản đã tồn tại)
-    @Test(priority = 9)
+    @Test(priority = 9, description = "Đăng ký không thành công(Tài khoản đã tồn tại)")
     public void testRegisterFails() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         registerPage.Register("abcd", "abcd", "Nguyễn Văn A", "01/01/2004", "Nam", "nguyenvana9999@gmail.com", "099999999", "Hà Nội");
@@ -116,8 +106,7 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test 10: Hủy thao tác đăng ký
-    @Test(priority = 10)
+    @Test(priority = 10, description = "Hủy thao tác đăng ký")
     public void testCancelRegister() throws InterruptedException {
         validateUtils.clickElementWithJS(getLinkQuayLai);
         validateUtils.waitForPageLoaded();

@@ -1,6 +1,7 @@
 package com.somee.tests;
 
 import com.somee.base.BaseTest;
+import com.somee.base.TestListener;
 import com.somee.pages.CartPage;
 import com.somee.pages.LoginPage;
 import com.somee.utils.ValidateUtils;
@@ -10,6 +11,7 @@ import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
 
+@Listeners(TestListener.class)
 public class CartTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LoginPage loginPage;
@@ -41,8 +43,7 @@ public class CartTest extends BaseTest {
         validateUtils.clickElementWithJS(dangNhapButton);
     }
 
-    // Test case 1: Thêm sản phẩm vào giỏ hàng
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Thêm sản phẩm vào giỏ hàng")
     public void addProductToCart() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -52,8 +53,7 @@ public class CartTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 2: Thêm nhiều sản phẩm vào giỏ hàng
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Thêm nhiều sản phẩm vào giỏ hàng")
     public void addProductsToCart() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -64,8 +64,7 @@ public class CartTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 3: Cập nhật số lượng sản phẩm trong giỏ hàng
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Cập nhật số lượng sản phẩm trong giỏ hàng")
     public void updateNumberOfProduct() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -83,8 +82,7 @@ public class CartTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 4: Xóa sản phẩm khỏi giỏ hàng
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Xóa sản phẩm khỏi giỏ hàng")
     public void deleteProductFromCart() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -99,8 +97,7 @@ public class CartTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 5: Xóa sản phẩm khỏi giỏ hàng
-    @Test(priority = 5)
+    @Test(priority = 5, description = "Xóa sản phẩm khỏi giỏ hàng")
     public void deleteAllProductsFromCart() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");

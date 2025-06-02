@@ -1,6 +1,7 @@
 package com.somee.tests;
 
 import com.somee.base.BaseTest;
+import com.somee.base.TestListener;
 import com.somee.pages.CategoryPage;
 import com.somee.pages.LoginPage;
 import com.somee.utils.ValidateUtils;
@@ -10,6 +11,7 @@ import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestListener.class)
 public class CategoryTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LoginPage loginPage;
@@ -35,8 +37,7 @@ public class CategoryTest extends BaseTest {
         validateUtils.clickElement(getLinkDangNhap);
     }
 
-    // Test case 1: Thêm danh mục thành công
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Thêm danh mục thành công")
     public void addCategorySuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -47,8 +48,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 2: Thêm danh mục với mã danh mục bị trống
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Thêm danh mục với mã danh mục bị trống")
     public void addCategoryWithEmptyID() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -58,8 +58,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 3: Thêm danh mục với tên danh mục bị trống
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Thêm danh mục với tên danh mục bị trống")
     public void addCategoryWithEmptyName() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -69,8 +68,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 4: Thêm danh mục với mã danh mục đã tồn tại
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Thêm danh mục với mã danh mục đã tồn tại")
     public void addCategoryWithExistID() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -80,8 +78,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 5: Thêm danh mục với tên danh mục đã tồn tại
-    @Test(priority = 5)
+    @Test(priority = 5, description = "Thêm danh mục với tên danh mục đã tồn tại")
     public void addCategoryWithExistName() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -91,9 +88,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-
-    // Test case 6: Xóa danh mục thành công
-    @Test(priority = 6)
+    @Test(priority = 6, description = "Xóa danh mục thành công")
     public void deleteCategorySuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -106,8 +101,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 7: Sửa danh mục
-    @Test(priority = 7)
+    @Test(priority = 7, description = "Sửa danh mục")
     public void testEditCategorySuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -118,8 +112,7 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 8: Hủy thao tác sửa danh mục
-    @Test(priority = 8)
+    @Test(priority = 8, description = "Hủy thao tác sửa danh mục")
     public void testCancelEditCategory() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");

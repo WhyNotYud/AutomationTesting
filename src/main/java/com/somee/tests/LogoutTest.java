@@ -1,18 +1,17 @@
 package com.somee.tests;
 
 import com.somee.base.BaseTest;
+import com.somee.base.TestListener;
 import com.somee.pages.LoginPage;
 import com.somee.pages.LogoutPage;
 import com.somee.utils.ValidateUtils;
 import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestListener.class)
 public class LogoutTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LogoutPage logoutPage;

@@ -1,17 +1,16 @@
 package com.somee.tests;
 
 import com.somee.base.BaseTest;
+import com.somee.base.TestListener;
 import com.somee.pages.LoginPage;
 import com.somee.utils.ValidateUtils;
 import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LoginPage loginPage;
@@ -38,8 +37,7 @@ public class LoginTest extends BaseTest {
         }
     }
 
-    // Test case 1: Đăng nhập thành công với admin
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Đăng nhập thành công với admin")
     public void testAdminLoginSuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
@@ -47,8 +45,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 2: Đăng nhập thành công với user
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Đăng nhập thành công với user")
     public void testUserLoginSuccess() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("abcd", "abcd");
@@ -56,8 +53,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 3: Sai tài khoản (mật khẩu đúng)
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Sai tài khoản (mật khẩu đúng)")
     public void testInvalidUsername() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("wronguser", "1234");
@@ -65,8 +61,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 4: Sai mật khẩu (tài khoản đúng)
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Sai mật khẩu (tài khoản đúng)")
     public void testInvalidPassword() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "wrongpassword");
@@ -74,8 +69,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 5: Sai cả tài khoản và mật khẩu
-    @Test(priority = 5)
+    @Test(priority = 5, description = "Sai cả tài khoản và mật khẩu")
     public void testInvalidCredentials() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("wronguser", "wrongpassword");
@@ -83,8 +77,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 6: Để trống tài khoản
-    @Test(priority = 6)
+    @Test(priority = 6, description = "Để trống tài khoản")
     public void testEmptyUsername() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("", "1234");
@@ -92,8 +85,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 7: Để trống mật khẩu
-    @Test(priority = 7)
+    @Test(priority = 7, description = "Để trống mật khẩu")
     public void testEmptyPassword() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "");
@@ -101,8 +93,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 8: Để trống cả tài khoản và mật khẩu
-    @Test(priority = 8)
+    @Test(priority = 8, description = "Để trống cả tài khoản và mật khẩu")
     public void testEmptyCredentials() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         loginPage.login("", "");
@@ -110,8 +101,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    // Test case 9: Hủy đăng nhập
-    @Test(priority = 9)
+    @Test(priority = 9, description = "Hủy đăng nhập")
     public void testCancelLogin() throws InterruptedException {
         validateUtils.waitForPageLoaded();
         validateUtils.clickElement(getLinkQuayLai);

@@ -4,10 +4,9 @@ import com.somee.base.BaseTest;
 import com.somee.pages.CategoryPage;
 import com.somee.pages.LoginPage;
 import com.somee.utils.ValidateUtils;
+import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
@@ -16,12 +15,15 @@ public class CategoryTest extends BaseTest {
     private LoginPage loginPage;
     private CategoryPage categoryPage;
 
-    private By getLinkDangNhap = By.id("LinkDN");
-    private By getDanhMuc = By.id("HyperLink5");
-    private By getBangDanhMuc = By.id("ContentPlaceHolder1_GridView1");
-    private By getThongBaoLoi = By.id("ContentPlaceHolder1_lblThongBao");
+    private final By getLinkDangNhap = By.id("LinkDN");
+    private final By getDanhMuc = By.id("HyperLink5");
+    private final By getBangDanhMuc = By.id("ContentPlaceHolder1_GridView1");
+    private final By getThongBaoLoi = By.id("ContentPlaceHolder1_lblThongBao");
 
-    private String tenDanhMuc;
+    @BeforeClass
+    public void setUpRecord() throws Exception {
+        VideoRecorder.startRecord("TestLogin");
+    }
 
     @BeforeMethod
     @Override
@@ -96,7 +98,7 @@ public class CategoryTest extends BaseTest {
         validateUtils.waitForPageLoaded();
         loginPage.login("admin", "1234");
         validateUtils.clickElementWithJS(getDanhMuc);
-        tenDanhMuc = "Kính Cận Loại 2";
+        String tenDanhMuc = "Kính Cận Loại 2";
         categoryPage.deleteCategoryByName(tenDanhMuc);
         Thread.sleep(2000);
         validateUtils.waitForPageLoaded();
@@ -128,9 +130,8 @@ public class CategoryTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @AfterMethod
-    @Override
-    public void tearDown() {
-        super.tearDown();
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        VideoRecorder.stopRecord();
     }
 }

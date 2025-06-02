@@ -4,10 +4,9 @@ import com.somee.base.BaseTest;
 import com.somee.pages.LoginPage;
 import com.somee.pages.OrderPage;
 import com.somee.utils.ValidateUtils;
+import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertTrue;
 
@@ -16,18 +15,23 @@ public class OrderTest extends BaseTest {
     private LoginPage loginPage;
     private OrderPage orderPage;
 
-    private By getLinkDangNhap = By.id("LinkDN");
-    private By getQuayLai = By.linkText("Quay lại");
-    private By getDanhSachSanPham = By.id("HyperLink2");
-    private By getSanPham = By.id("ContentPlaceHolder1_DataList1_HyperLink1_2");
-    private By getSoLuong = By.id("ContentPlaceHolder1_Datalist1_txtSoLuong_0");
-    private By getThemGioHang = By.id("ContentPlaceHolder1_Datalist1_btnThemVaoGio_0");
-    private By getThanhToan = By.id("ContentPlaceHolder1_btnThanhToan");
-    private By getThongBao = By.id("ContentPlaceHolder1_lblThanhCong");
-    private By getThongBaoLoi = By.id("ContentPlaceHolder1_lblThongBao");
-    private By getThongBaoLoiUser = By.id("ContentPlaceHolder1_dtlThongTinUser_lblThongBao_0");
-    private By getGioHang = By.id("HyperLink4");
-    private By ghiChu = By.id("ContentPlaceHolder1_dtlThongTinUser_txtGhiChu_0");
+    private final By getLinkDangNhap = By.id("LinkDN");
+    private final By getQuayLai = By.linkText("Quay lại");
+    private final By getDanhSachSanPham = By.id("HyperLink2");
+    private final By getSanPham = By.id("ContentPlaceHolder1_DataList1_HyperLink1_2");
+    private final By getSoLuong = By.id("ContentPlaceHolder1_Datalist1_txtSoLuong_0");
+    private final By getThemGioHang = By.id("ContentPlaceHolder1_Datalist1_btnThemVaoGio_0");
+    private final By getThanhToan = By.id("ContentPlaceHolder1_btnThanhToan");
+    private final By getThongBao = By.id("ContentPlaceHolder1_lblThanhCong");
+    private final By getThongBaoLoi = By.id("ContentPlaceHolder1_lblThongBao");
+    private final By getThongBaoLoiUser = By.id("ContentPlaceHolder1_dtlThongTinUser_lblThongBao_0");
+    private final By getGioHang = By.id("HyperLink4");
+    private final By ghiChu = By.id("ContentPlaceHolder1_dtlThongTinUser_txtGhiChu_0");
+
+    @BeforeClass
+    public void setUpRecord() throws Exception {
+        VideoRecorder.startRecord("TestOrder");
+    }
 
     @BeforeMethod
     @Override
@@ -94,9 +98,8 @@ public class OrderTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @AfterMethod
-    @Override
-    public void tearDown() {
-        super.tearDown();
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        VideoRecorder.stopRecord();
     }
 }

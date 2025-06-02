@@ -4,8 +4,10 @@ import com.somee.base.BaseTest;
 import com.somee.pages.LoginPage;
 import com.somee.pages.LogoutPage;
 import com.somee.utils.ValidateUtils;
+import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -16,7 +18,12 @@ public class LogoutTest extends BaseTest {
     private LogoutPage logoutPage;
     private LoginPage loginPage;
 
-    private By getLinkDangNhap = By.id("LinkDN");
+    private final By getLinkDangNhap = By.id("LinkDN");
+
+    @BeforeClass
+    public void setUpRecord() throws Exception {
+        VideoRecorder.startRecord("TestLogout");
+    }
 
     @BeforeMethod
     @Override
@@ -48,9 +55,8 @@ public class LogoutTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @AfterMethod
-    @Override
-    public void tearDown() {
-        super.tearDown();
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        VideoRecorder.stopRecord();
     }
 }

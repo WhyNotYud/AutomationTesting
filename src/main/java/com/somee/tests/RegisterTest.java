@@ -3,8 +3,10 @@ package com.somee.tests;
 import com.somee.base.BaseTest;
 import com.somee.pages.RegisterPage;
 import com.somee.utils.ValidateUtils;
+import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,10 +16,15 @@ public class RegisterTest extends BaseTest {
     private ValidateUtils validateUtils;
     private RegisterPage registerPage;
 
-    private By getLinkDangKy = By.id("LinkDK");
-    private By getLinkQuayLai = By.linkText("Quay lại");
-    private By thongTinTaiKhoan = By.id("lblHTTK");
-    private By thongBao = By.id("ContentPlaceHolder1_lblThongBao");
+    private final By getLinkDangKy = By.id("LinkDK");
+    private final By getLinkQuayLai = By.linkText("Quay lại");
+    private final By thongTinTaiKhoan = By.id("lblHTTK");
+    private final By thongBao = By.id("ContentPlaceHolder1_lblThongBao");
+
+    @BeforeClass
+    public void setUpRecord() throws Exception {
+        VideoRecorder.startRecord("TestRegister");
+    }
 
     @BeforeMethod
     @Override
@@ -118,9 +125,8 @@ public class RegisterTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @AfterMethod
-    @Override
-    public void tearDown() {
-        super.tearDown();
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        VideoRecorder.stopRecord();
     }
 }

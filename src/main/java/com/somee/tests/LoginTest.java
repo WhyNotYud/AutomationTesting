@@ -3,8 +3,10 @@ package com.somee.tests;
 import com.somee.base.BaseTest;
 import com.somee.pages.LoginPage;
 import com.somee.utils.ValidateUtils;
+import com.somee.utils.VideoRecorder;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,9 +15,14 @@ import static org.testng.Assert.assertTrue;
 public class LoginTest extends BaseTest {
     private ValidateUtils validateUtils;
     private LoginPage loginPage;
-    private By getLinkDangNhap = By.id("LinkDN");
-    private By getLinkQuayLai = By.linkText("Quay lại");
-    private By errorMessage = By.id("ContentPlaceHolder1_txtThongbaoDN");
+    private final By getLinkDangNhap = By.id("LinkDN");
+    private final By getLinkQuayLai = By.linkText("Quay lại");
+    private final By errorMessage = By.id("ContentPlaceHolder1_txtThongbaoDN");
+
+    @BeforeClass
+    public void setUpRecord() throws Exception {
+        VideoRecorder.startRecord("TestLogin");
+    }
 
     @BeforeMethod
     @Override
@@ -24,6 +31,11 @@ public class LoginTest extends BaseTest {
         loginPage = new LoginPage(driver);
         validateUtils = new ValidateUtils(driver);
         validateUtils.clickElement(getLinkDangNhap);
+        try {
+            VideoRecorder.startRecord("TestLogin");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // Test case 1: Đăng nhập thành công với admin
@@ -107,9 +119,8 @@ public class LoginTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @AfterMethod
-    @Override
-    public void tearDown() {
-        super.tearDown();
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        VideoRecorder.stopRecord();
     }
 }

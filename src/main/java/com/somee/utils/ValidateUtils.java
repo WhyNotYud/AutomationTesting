@@ -72,7 +72,7 @@ public class ValidateUtils {
     }
 
     public void selectedValue(By element, String value) {
-        WebElement dropdownElement= wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        WebElement dropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -106,22 +106,22 @@ public class ValidateUtils {
     }
 
     public boolean verifyCategoryAddedToTable(By categoryTable, String categoryName) {
-         WebElement table = driver.findElement(categoryTable);
-         boolean found = false;
-         List<WebElement> rows = table.findElements(By.tagName("tr"));
-         for (WebElement row : rows) {
-             List<WebElement> cells = row.findElements(By.tagName("td"));
-             for (WebElement cell : cells) {
-                 if (cell.getText().equals(categoryName)) {
-                     found = true;
-                     break;
-                 }
-             }
-             if (found) {
-                 break;
-             }
-         }
-         return found;
+        WebElement table = driver.findElement(categoryTable);
+        boolean found = false;
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            for (WebElement cell : cells) {
+                if (cell.getText().equals(categoryName)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                break;
+            }
+        }
+        return found;
     }
 
     public boolean verifyCategoryExistsInTable(String categoryName) {
@@ -149,6 +149,34 @@ public class ValidateUtils {
             return true;
         } catch (org.openqa.selenium.TimeoutException e) {
             return false;
+        }
+    }
+
+    public boolean checkProductInCart(String productName) {
+        waitForPageLoaded();
+        By cartTableLocator = By.id("ContentPlaceHolder1_gvGioHang");
+        By productRowInCartLocator = By.xpath(
+                "//table[@id='ContentPlaceHolder1_gvGioHang']//tr[./td/span[contains(@id, 'lblTenSP_') and text()='" + productName + "']]"
+        );
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(productRowInCartLocator));
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        }
+    }
+
+    public int checkNumberOfProduct(String productName) {
+        waitForPageLoaded();
+        By viTriSoLuong = By.xpath(
+                "//table[@id='ContentPlaceHolder1_gvGioHang']//tr[./td/span[contains(@id, 'lblTenSP_') and text()='" + productName + "']]/td/input[contains(@id, 'txtSoLuong_') and @type='text']"
+        );
+        try {
+            WebElement soLuong = wait.until(ExpectedConditions.visibilityOfElementLocated(viTriSoLuong));
+            String quantityString = soLuong.getAttribute("value");
+            return Integer.parseInt(quantityString.trim());
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return -1;
         }
     }
 }
